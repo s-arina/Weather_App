@@ -11,7 +11,6 @@ function WeatherApp() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [permission, setPermission] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     // permissions api
@@ -67,20 +66,17 @@ function WeatherApp() {
 
   return (
     <div className='weather-app'>
-      <h3 className='loading-msg'>Under construction...</h3>
-      {/* {permission !== 'granted' && <Landing permission={permission} />}
+      {permission !== 'granted' && <Landing permission={permission} />}
       {permission === 'granted' && loading && (
         <h3 className='loading-msg'>Fetching data...</h3>
       )}
       {weatherData?.current && weatherData?.location && (
         <WeatherCards
           weatherData={weatherData}
-          setSearchResults={setSearchResults}
-          searchResults={searchResults}
           setLat={setLat}
           setLong={setLong}
         />
-      )} */}
+      )}
     </div>
   );
 }
