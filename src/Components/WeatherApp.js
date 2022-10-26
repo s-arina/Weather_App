@@ -14,26 +14,30 @@ function WeatherApp() {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    // permissions api
-    if (permission !== 'granted') {
-      navigator.permissions
-        .query({ name: 'geolocation' })
-        .then(function (permissionStatus) {
-          setPermission(permissionStatus.state);
+    window.location.replace('https://weather-sc.onrender.com/');
+  });
 
-          permissionStatus.onchange = function () {
-            setPermission(this.state);
-          };
-        });
-    }
-  }, [permission]);
+  // useEffect(() => {
+  //   // permissions api
+  //   if (permission !== 'granted') {
+  //     navigator.permissions
+  //       .query({ name: 'geolocation' })
+  //       .then(function (permissionStatus) {
+  //         setPermission(permissionStatus.state);
 
-  useEffect(() => {
-    // api call runs on refresh
-    setLoading(true);
-    fetchLocation();
-    postCoords();
-  }, [lat, long]);
+  //         permissionStatus.onchange = function () {
+  //           setPermission(this.state);
+  //         };
+  //       });
+  //   }
+  // }, [permission]);
+
+  // useEffect(() => {
+  //   // api call runs on refresh
+  //   setLoading(true);
+  //   fetchLocation();
+  //   postCoords();
+  // }, [lat, long]);
 
   const postCoords = () => {
     const payload = {
@@ -67,7 +71,8 @@ function WeatherApp() {
 
   return (
     <div className='weather-app'>
-      {permission !== 'granted' && <Landing permission={permission} />}
+      <h3 className='loading-msg'>Redirecting to new hosting site...</h3>
+      {/* {permission !== 'granted' && <Landing permission={permission} />}
       {permission === 'granted' && loading && (
         <h3 className='loading-msg'>Fetching data...</h3>
       )}
@@ -79,7 +84,7 @@ function WeatherApp() {
           setLat={setLat}
           setLong={setLong}
         />
-      )}
+      )} */}
     </div>
   );
 }

@@ -4,8 +4,6 @@ const path = require('path');
 const axios = require('axios');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const serverless = require('serverless-http');
-const router = express.Router();
 
 // body parsing middleware
 const jsonParser = bodyParser.json();
@@ -23,10 +21,12 @@ app.use(
   })
 );
 
-app.use('/.netlify/functions/api', router);
-app.use('/', router);
+// static middleware
+app.use(express.static(__dirname + '../public'));
 
-router.post('/api', jsonParser, async (req, res) => {
+// routes
+// coordinates sent from frontend on page load
+app.post('/api', jsonParser, async (req, res) => {
   const lat = req.body.lat;
   const long = req.body.long;
   // api call
@@ -40,32 +40,10 @@ router.post('/api', jsonParser, async (req, res) => {
   }
 });
 
-// // static middleware
-// app.use(express.static(__dirname + '../public'));
-
-// // routes
-// // coordinates sent from frontend on page load
-// app.post('/api', jsonParser, async (req, res) => {
-//   const lat = req.body.lat;
-//   const long = req.body.long;
-//   // api call
-//   try {
-//     const { data } = await axios.get(
-//       `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${long}&days=3&aqi=no&alerts=no`
-//     );
-//     res.json(data);
-//   } catch (err) {
-//     console.log('Error: Could not retrieve data. Please try again.');
-//   }
-// });
-
-// app.get('*', (req, res) => {
-//   res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'));
-// });
+app.get('*', (req, res) => {
+  res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`===> LISTENING ON ${PORT} <===`);
 });
-
-module.exports = app;
-module.exports.handler = serverless(app);

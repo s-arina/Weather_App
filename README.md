@@ -1,5 +1,7 @@
 ## weather – s.c.
 
+UPDATE 10/26/22: Now hosted on https://weather-sc.onrender.com/
+
 https://weather-sc.netlify.app
 
 ![mockup](https://weather-sc.netlify.app/assets/weather_mockup.png)
