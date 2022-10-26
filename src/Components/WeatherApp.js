@@ -11,7 +11,6 @@ function WeatherApp() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [permission, setPermission] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     window.location.replace('https://weather-sc.onrender.com/');
@@ -79,8 +78,6 @@ function WeatherApp() {
       {weatherData?.current && weatherData?.location && (
         <WeatherCards
           weatherData={weatherData}
-          setSearchResults={setSearchResults}
-          searchResults={searchResults}
           setLat={setLat}
           setLong={setLong}
         />
